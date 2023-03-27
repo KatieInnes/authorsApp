@@ -1,10 +1,8 @@
 import React, {useEffect, useState} from 'react'
-import {Link, useParams, useNavigate} from 'react-router-dom'
+import {Link, useNavigate} from 'react-router-dom'
 import axios from 'axios';
 
 const AllAuthors = () => {
-
-    const {id} = useParams();
 
     const [formData, setFormData] = useState([]);
 
@@ -22,8 +20,8 @@ const AllAuthors = () => {
         })
     }, [setFormData]);
 
-    const navigateToUpdateAuthor= (e) => {
-        navigate(`/edit/${id}`)
+    const navigateToUpdateAuthor= (authorID) => {
+        navigate(`/edit/${authorID}`)
     }
 
     const deleteAuthor = (authorID) => {
@@ -55,8 +53,8 @@ const AllAuthors = () => {
                         <tbody>
                             {formData.map((author, index) => (
                                 <tr key={index}>
-                                    <Link to={`/author/${author._id}`}>{author.authorName}</Link>
-                                    <td><button onClick={(e) => navigateToUpdateAuthor()}>Edit</button> | <button className='delete' onClick = { () => deleteAuthor(author._id) }>Delete</button></td>
+                                    <p>{author.authorName}</p>
+                                    <td><button onClick={(e) => navigateToUpdateAuthor(author._id)}>Edit</button> | <button className='delete' onClick = { () => deleteAuthor(author._id) }>Delete</button></td>
                                 </tr>
                             ))}
                         </tbody>
